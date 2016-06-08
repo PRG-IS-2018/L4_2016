@@ -1,4 +1,6 @@
 #include "circle.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 Point::Point(double x, double y) {
 	m_x = x;
@@ -18,4 +20,8 @@ Circle::Circle(Point& centr, Point& dot): m_centr(centr) {
 
 std::ostream& operator<<(std::ostream& os, Circle& cir) {
 	return os << "Circle: centr - " << cir.m_centr << ", rad - " << cir.m_rad << std::endl;
+}
+
+double Circle::GetArea() {
+	return m_rad*m_rad* M_PI;
 }

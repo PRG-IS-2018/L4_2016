@@ -21,9 +21,15 @@
     <ClCompile Include="circle.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
