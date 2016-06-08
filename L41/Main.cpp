@@ -29,6 +29,19 @@ void main() {
 	L1.AddNode(C1);
 	L1.AddNode(C2);
 	std::cout << L1;
+
+	//int c = 0,c1=0, c2 = 0,c3=0;
+	//for (int i = 1; i < 401;i++) {
+	//	c1 = i / 100;
+	//	c2 = (i / 10)- c1*10;
+	//	c3 = i - c2*10 - c1*100;
+	//	if ((c1 + c2 + c3) == 4)   {
+	//		std::cout << c1 << " " << c2 << " " << c3 << std::endl;
+	//		c++;
+	//	}
+	//}
+	//std::cout << c << std::endl;
+	
 	_SP
 
 
