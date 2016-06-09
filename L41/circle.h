@@ -12,7 +12,7 @@ protected:
 public:
 
 	Point(double = 0, double = 0);
-	friend std::ostream& operator<<(std::ostream&, Point&);
+	friend std::ostream& operator<<(std::ostream&, const Point&);
 
 };
 
@@ -22,9 +22,12 @@ class Circle{
 	double m_rad;
 public:
 	Circle(double x=0, double y=0, double rad=0);
-	Circle(Point&, Point&);
+	Circle(const Point&, const Point&);
+	Circle(const Point&, const double);
+	Circle(const Circle&) = default;
+
 	double GetArea();
-	friend std::ostream& operator<<(std::ostream&, Circle&);
+	friend std::ostream& operator<<(std::ostream&, const  Circle&);
 	~Circle() = default;
 
 };
