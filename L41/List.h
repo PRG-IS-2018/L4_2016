@@ -13,7 +13,7 @@ class List{
 		Node(const Node&, Node* = nullptr, Node* = nullptr);
 		//Node(Node&&, Node* = nullptr, Node* = nullptr);
 		~Node();
-
+		
 		//friend class List;
 
 	};
@@ -22,16 +22,20 @@ class List{
 		size_t m_size;
 protected:
 	void AddNode(const Node&);
-	Node* GetRemoveNode(Node&);
+	Node& GetRemoveNode(Node&);
 public:
 	List();
 	List(const List&);
 	List(List&&);
 	
+	//Node& Find(List&, typename T );
+	Node& FindMin(List&);
 	void AddNode(const Circle&);
 	void AddNode(Circle&&);
-	
+	void Swap(List&);
+	void Sort();
 
+	
 	friend std::ostream& operator<<(std::ostream&, List&);
 	~List();
 };

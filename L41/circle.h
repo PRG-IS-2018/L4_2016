@@ -25,6 +25,7 @@ public:
 	Circle(const Point&, const Point&);
 	Circle(const Point&, const double);
 	Circle(const Circle&) = default;
+	Circle(Circle&&) = default;
 
 	double GetArea();
 	friend std::ostream& operator<<(std::ostream&, const  Circle&);

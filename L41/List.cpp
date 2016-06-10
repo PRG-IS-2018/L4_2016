@@ -26,15 +26,17 @@ List::Node::Node(const Node& other, Node* prev, Node* next) {
 	}
 	else { m_Cir = nullptr; }
 }
-List::Node::~Node(){             
- 	if (m_Prev_p) {
-		m_Prev_p->m_Next_p = m_Next_p;
+List::Node::~Node(){         
+	if (this) {
+		if (m_Prev_p) {
+			m_Prev_p->m_Next_p = m_Next_p;
+		}
+		if (m_Next_p) {
+			m_Next_p->m_Prev_p = m_Prev_p;
+		}
+		delete m_Cir;
 	}
-	if (m_Next_p){ 
-		m_Next_p->m_Prev_p = m_Prev_p;
-	}
-	delete m_Cir;
-
+	
 	//List::m_size--;
 }
 
@@ -63,8 +65,9 @@ void List::AddNode(Circle&& cir) {
 List::List(const List& other){
 	Tail.m_Prev_p = &Head;
 	Head.m_Next_p = &Tail;
-	m_size = other.m_size;
+	
 	List::Node* curNodeSource = other.Head.m_Next_p;
+		//m_size = other.m_size;
 		//Head.m_Next_p = static_cast<Node*>(malloc(sizeof(Node)*m_size));
 		//List::Node* curNodeDest = Head.m_Next_p;
 		//curNodeDest->m_Prev_p = &Head;
@@ -79,16 +82,79 @@ List::List(const List& other){
 
 List::List(List&& other) {
 	m_size = other.m_size;
+
 	Head.m_Next_p = other.Head.m_Next_p;
-	other.Head.m_Next_p = nullptr;
+	Head.m_Next_p->m_Prev_p = &Head;
+	other.Head.m_Next_p = &other.Tail;
+
 	Tail.m_Prev_p = other.Tail.m_Prev_p;
-	other.Tail.m_Prev_p = nullptr;
+	Tail.m_Prev_p->m_Next_p = &Tail;
+	other.Tail.m_Prev_p = &other.Head;
 }
 
-List::Node* List::GetRemoveNode(Node& del) {
+void List::Swap(List& other) {
+	//List tmp(*this);
+
+	Node* tmpH = Head.m_Next_p;
+	Node* tmpT = Tail.m_Prev_p;
+
+	if (other.Head.m_Next_p != &other.Tail) {
+		Head.m_Next_p = other.Head.m_Next_p;
+		Head.m_Next_p->m_Prev_p = &Head;
+		Tail.m_Prev_p = other.Tail.m_Prev_p;
+		Tail.m_Prev_p->m_Next_p = &Tail;
+	}
+	else {
+		Head.m_Next_p = &Tail;
+		Tail.m_Prev_p = &Head;
+	}
+
+	if ((tmpH != &Tail)||(tmpT != &Head)) {
+		other.Head.m_Next_p = tmpH;
+		other.Head.m_Next_p->m_Prev_p = &other.Head;
+		other.Tail.m_Prev_p = tmpT;
+		other.Tail.m_Prev_p->m_Next_p = &other.Tail;
+	}
+	else {
+		other.Head.m_Next_p = &other.Tail;
+		other.Tail.m_Prev_p = &other.Head;
+	}
+	m_size ^= other.m_size;
+	other.m_size ^= m_size;
+	m_size ^= other.m_size;
+
+	//////////////////как написать Ёффективнее?....
+}
+
+
+List::Node& List::FindMin(List&) {
+	Node* MinNode = nullptr;
+	Node* RunningNode = nullptr;
+	if (Head.m_Next_p->m_Cir) {
+		MinNode = Head.m_Next_p;
+		RunningNode = MinNode;
+	}
+	else { return Tail; }
+	while (RunningNode != &Tail){
+		if (RunningNode->m_Cir->GetArea() < MinNode->m_Cir->GetArea()) {
+			MinNode = RunningNode;
+		}
+		RunningNode = RunningNode->m_Next_p;
+	}
+	return *MinNode;
+}
+
+void List::Sort() {
+	List tmp;
+	while (Head.m_Next_p != &Tail){
+		tmp.AddNode(GetRemoveNode(FindMin(*this)));
+	}
+	Swap(tmp);
+}
+
+List::Node& List::GetRemoveNode(Node& del) {
 	if (del.m_Prev_p) {
 		del.m_Prev_p->m_Next_p = del.m_Next_p;
-
 	}
 	if (del.m_Next_p) {
 		del.m_Next_p->m_Prev_p = del.m_Prev_p;
@@ -96,7 +162,7 @@ List::Node* List::GetRemoveNode(Node& del) {
 	del.m_Prev_p = nullptr;
 	del.m_Next_p = nullptr;
 	m_size--;
-	return &del;
+	return del;
 }
 
 std::ostream& operator<<(std::ostream& os, List& l) {          
@@ -115,5 +181,6 @@ List::~List(){
 		Tail.m_Prev_p->~Node();
 		m_size--;
 	}
+
 	// delete Head,Tail ???
 }
