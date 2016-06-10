@@ -29,8 +29,10 @@ void main() {
 	List L1;
 	L1.AddNode(C1);
 	L1.AddNode(C2);
-	L1.AddNode(Circle(p10, p1));
+	std::cout << L1;
+	_SP
 
+	L1.AddNode(Circle(p10, p1));
 	List L2(L1);
 	List L3(std::move(L2));
 	std::cout << L3;
