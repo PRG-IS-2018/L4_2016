@@ -21,7 +21,7 @@ class List{
 		Node Tail;
 		size_t m_size;
 protected:
-	void AddNode(const Node&);
+	void AddNode(Node&);
 	Node& GetRemoveNode(Node&);
 public:
 	List();

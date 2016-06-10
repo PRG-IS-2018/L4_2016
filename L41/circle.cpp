@@ -22,7 +22,7 @@ Circle::Circle(const Point& centr, double rad) : m_centr(centr) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Circle& cir) {
-	return os << "Circle: centr - " << cir.m_centr << ", rad - " << cir.m_rad << std::endl;
+	return os << "Circle: centr - (" << cir.m_centr << "), rad - " << cir.m_rad << std::endl;
 }
 
 double Circle::GetArea() {

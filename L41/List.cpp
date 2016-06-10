@@ -2,8 +2,7 @@
 
 List::Node::Node(const  Circle* cir, Node* prev, Node* next):m_Cir(*cir){
 	m_Prev_p = prev;
-	m_Next_p = next;
-		
+	m_Next_p = next;		
 }
 
 List::Node::Node( Circle&& cir, Node* prev, Node* next):m_Cir(std::move(cir)) {
@@ -12,7 +11,6 @@ List::Node::Node( Circle&& cir, Node* prev, Node* next):m_Cir(std::move(cir)) {
 }
 
 List::Node::Node(const Node& other, Node* prev, Node* next):m_Cir(other.m_Cir) {
-
 	m_Prev_p = prev;
 	m_Next_p = next;
 }
@@ -34,8 +32,10 @@ List::List():Tail(),Head(){
 	m_size = 0; 
 }
 
-void List::AddNode(const Node& newN) {
-	Tail.m_Prev_p->m_Next_p = new Node(newN, Tail.m_Prev_p, &Tail);
+void List::AddNode(Node& ExistingNode) {
+	ExistingNode.m_Prev_p = Tail.m_Prev_p;
+	Tail.m_Prev_p->m_Next_p = &ExistingNode;
+	ExistingNode.m_Next_p = &Tail;
 	Tail.m_Prev_p = Tail.m_Prev_p->m_Next_p;
 	m_size++;
 }
@@ -60,7 +60,9 @@ List::List(const List& other){
 		//List::Node* curNodeDest = Head.m_Next_p;
 		//curNodeDest->m_Prev_p = &Head;
 	while (curNodeSource != &other.Tail){
-		AddNode(*curNodeSource);
+		Tail.m_Prev_p->m_Next_p = new Node(*curNodeSource, Tail.m_Prev_p, &Tail);
+		Tail.m_Prev_p = Tail.m_Prev_p->m_Next_p;
+		m_size++;
 		curNodeSource = curNodeSource->m_Next_p;
 			//curNodeDest = new Node(*curNodeSource, curNodeDest->m_Prev_p, &Tail);
 			//curNodeDest = curNodeDest->m_Next_p;
@@ -159,7 +161,7 @@ std::ostream& operator<<(std::ostream& os, List& l) {
 
 List::~List(){
 	while (Head.m_Next_p != &Tail){
-		Tail.m_Prev_p->~Node();
+		delete Tail.m_Prev_p;
 		m_size--;
 	}
 // delete Head,Tail ???
