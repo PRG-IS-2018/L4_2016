@@ -7,8 +7,8 @@ class List{
 
 		Node* m_Prev_p;
 		Node* m_Next_p;
-		Circle* m_Cir;
-		Node(const Circle* = nullptr, Node* = nullptr, Node* = nullptr);
+		Circle m_Cir;
+		Node(const Circle* = &Circle(), Node* = nullptr, Node* = nullptr);
 		Node(Circle&& , Node* = nullptr, Node* = nullptr);
 		Node(const Node&, Node* = nullptr, Node* = nullptr);
 		//Node(Node&&, Node* = nullptr, Node* = nullptr);

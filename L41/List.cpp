@@ -1,30 +1,20 @@
 #include "List.h"
 
-List::Node::Node(const  Circle* cir, Node* prev, Node* next){
+List::Node::Node(const  Circle* cir, Node* prev, Node* next):m_Cir(*cir){
 	m_Prev_p = prev;
 	m_Next_p = next;
-	if (cir) {
-		m_Cir = static_cast<Circle*>(malloc(sizeof(Circle)));
-		new(m_Cir)Circle(const_cast<Circle&>(*cir));
-	}
-	else { m_Cir = nullptr; }
+		
 }
 
-List::Node::Node( Circle&& cir, Node* prev, Node* next) {
+List::Node::Node( Circle&& cir, Node* prev, Node* next):m_Cir(std::move(cir)) {
 	m_Prev_p = prev;
 	m_Next_p = next;
-	m_Cir = new Circle(std::move(cir));
 }
 
-List::Node::Node(const Node& other, Node* prev, Node* next) {
+List::Node::Node(const Node& other, Node* prev, Node* next):m_Cir(other.m_Cir) {
 
 	m_Prev_p = prev;
 	m_Next_p = next;
-	if (other.m_Cir) {
-		m_Cir = static_cast<Circle*>(malloc(sizeof(Circle)));
-		new(m_Cir)Circle(*other.m_Cir);
-	}
-	else { m_Cir = nullptr; }
 }
 List::Node::~Node(){         
 	if (this) {
@@ -34,9 +24,7 @@ List::Node::~Node(){
 		if (m_Next_p) {
 			m_Next_p->m_Prev_p = m_Prev_p;
 		}
-		delete m_Cir;
 	}
-	
 	//List::m_size--;
 }
 
@@ -128,15 +116,10 @@ void List::Swap(List& other) {
 
 
 List::Node& List::FindMin(List&) {
-	Node* MinNode = nullptr;
-	Node* RunningNode = nullptr;
-	if (Head.m_Next_p->m_Cir) {
-		MinNode = Head.m_Next_p;
-		RunningNode = MinNode;
-	}
-	else { return Tail; }
+	Node* MinNode = Head.m_Next_p;
+	Node* RunningNode = MinNode;
 	while (RunningNode != &Tail){
-		if (RunningNode->m_Cir->GetArea() < MinNode->m_Cir->GetArea()) {
+		if (RunningNode->m_Cir.GetArea() < MinNode->m_Cir.GetArea()) {
 			MinNode = RunningNode;
 		}
 		RunningNode = RunningNode->m_Next_p;
@@ -168,9 +151,7 @@ List::Node& List::GetRemoveNode(Node& del) {
 std::ostream& operator<<(std::ostream& os, List& l) {          
 	List::Node* curN = l.Head.m_Next_p;
 	while (curN != &l.Tail) {
-		if (curN->m_Cir) {
-			os << *curN->m_Cir << std::endl;
-		}
+		os << curN->m_Cir << std::endl;
 		curN = curN->m_Next_p;
 	}
 	return os;
@@ -181,6 +162,5 @@ List::~List(){
 		Tail.m_Prev_p->~Node();
 		m_size--;
 	}
-
-	// delete Head,Tail ???
+// delete Head,Tail ???
 }
