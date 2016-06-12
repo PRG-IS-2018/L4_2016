@@ -21,7 +21,8 @@ class List{
 		Node Tail;
 		size_t m_size;
 protected:
-	void AddNode(Node&);
+	void AddNodeT(Node&);
+	void AddNodeH(Node&);
 	Node& GetRemoveNode(Node&);
 public:
 	List();
@@ -30,9 +31,16 @@ public:
 	
 	//Node& Find(List&, typename T );
 	Node& FindMin(List&);
-	void AddNode(const Circle&);
-	void AddNode(Circle&&);
+	void AddToTail(const Circle&);
+	void AddToTail(Circle&&);
+	void AddToHead(const Circle&);
+	void AddToHead(Circle&&);
+	void RemoveFirst();
+	void RemoveLast();
+	bool FindRemoveCir(const Circle&);
+	uint32_t FindRemoveAllCir(const Circle&);
 	void Swap(List&);
+	List& operator=(const List&);
 	void Sort();
 
 	

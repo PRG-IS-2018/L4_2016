@@ -27,9 +27,10 @@ void main() {
 	//std::cout << C1;
 
 	List L1;
-	L1.AddNode(C1);
-	L1.AddNode(C2);
-	L1.AddNode(Circle(p10, p1));
+	L1.AddToTail(C1);
+	L1.AddToTail(C2);
+	L1.AddToHead(Circle(p10, 2));
+	L1.AddToTail(Circle(p10, p1));
 	
 	//std::cout << L1;
 	//_SP
@@ -37,12 +38,27 @@ void main() {
 	//std::cout << L2;
 	//_SP
 	List L3(std::move(L2));
+	L2 = L1;
+	//std::cout << L3;
+	//_SP
+	L3.FindRemoveCir(C1);
+	//std::cout << L3;
+	//_SP
+	L1.RemoveFirst();
+	L1.RemoveFirst();
+	L1.RemoveLast();
+
+	//std::cout << L1;
+	//_SP
+	/*L3.Sort();
 	std::cout << L3;
-	_SP
+	_SP*/
+	L3 = L1;
+	std::cout << L3;
+	_SP;
+	L3 = L2;
 	L3.Sort();
 	std::cout << L3;
-	_SP
-
-
-
+	
+	_SP;
 }

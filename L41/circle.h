@@ -12,6 +12,7 @@ protected:
 public:
 
 	Point(double = 0, double = 0);
+	bool operator==(const Point&);
 	friend std::ostream& operator<<(std::ostream&, const Point&);
 
 };
@@ -26,7 +27,9 @@ public:
 	Circle(const Point&, const double);
 	Circle(const Circle&) = default;
 	Circle(Circle&&) = default;
-
+	bool operator==(const Circle&);
+	Circle& operator=(const Circle&)=default;
+	//bool operator==(const Circle&, typename);
 	double GetArea();
 	friend std::ostream& operator<<(std::ostream&, const  Circle&);
 	~Circle() = default;

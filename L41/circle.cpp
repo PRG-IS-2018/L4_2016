@@ -7,6 +7,10 @@ Point::Point(double x, double y) {
 	m_y = y;
 }
 
+bool Point::operator==(const Point & other){
+	return ((m_x==other.m_x) && (m_y==other.m_y));
+}
+
 std::ostream& operator<<(std::ostream& os, const  Point& poi) {
 	return	os << "Point: x=" << poi.m_x << ",  y=" << poi.m_y ;
 }
@@ -18,9 +22,12 @@ Circle::Circle(const Point& centr, const Point& dot): m_centr(centr) {
 	m_rad = sqrt((dot.m_x - centr.m_x)*(dot.m_x - centr.m_x) + (dot.m_y - centr.m_y)*(dot.m_y - centr.m_y));
 }
 Circle::Circle(const Point& centr, double rad) : m_centr(centr) {
+	
 	m_rad = rad;
 }
-
+bool Circle::operator==(const Circle& other) {
+	return ((m_rad == other.m_rad)&&(m_centr == other.m_centr));
+}
 std::ostream& operator<<(std::ostream& os, const Circle& cir) {
 	return os << "Circle: centr - (" << cir.m_centr << "), rad - " << cir.m_rad << std::endl;
 }
