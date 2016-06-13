@@ -5,6 +5,7 @@
 
 #include "circle.h"
 #include "List.h"
+#include "Point.h"
 
 
 #define _CRT_SECURE_NO_WARNINGS

@@ -1,16 +1,33 @@
 #pragma once
-
 #include <iostream>
-//#include <conio.h>
 
 class Point{
-	int m_x;
-	int m_y;
-	//friend class Circle;
-public:
-	Point(int = 0, int = 0);
-	friend std::ostream& operator<<(std::ostream&, Point&);
+	double m_x;
+	double m_y;
+	friend class Circle;
 
-private:
+	friend Point& operator-= (Point&, const Point&);
+	friend Point& operator-= (Point&, double);
+	friend Point operator- (const Point&, const double);
+	friend Point operator- (const Point&, const Point&);
 
+	friend Point operator+ (const int, const Point&);
+	
+	
+	public:
+		Point(double = 0, double = 0);
+		bool operator==(const Point&);
+		friend std::ostream& operator<<(std::ostream&, const Point&);
+	
+	//Point(Point&&); //не сильно нужен, но написан для проверки
+	Point& operator= (const Point&);
+
+	Point& operator+= (const Point&);
+	Point& operator+= (const double);
+
+	Point operator+ (const double);
+	Point operator+ (const Point&);
+	Point operator- ();
+	Point operator+ ();
 };
+

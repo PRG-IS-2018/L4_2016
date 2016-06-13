@@ -1,21 +1,8 @@
 #pragma once
 #include <iostream>
+#include "Point.h"
 
 
-class Point {
-
-	friend class Circle; /////????????????
-protected:
-	double m_x;
-	double m_y;
-
-public:
-
-	Point(double = 0, double = 0);
-	bool operator==(const Point&);
-	friend std::ostream& operator<<(std::ostream&, const Point&);
-
-};
 
 
 class Circle{
