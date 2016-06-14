@@ -264,8 +264,12 @@ std::ofstream& operator<<(std::ofstream& os, List&l) {
 	return os;
 }
 
-std::ifstream& operator >> (std::ifstream& os, List&l) {
-
+std::ifstream& operator>> (std::ifstream& os, List&l) {
+	double x, y, r;
+	while (os >> x >> y >> r) {
+		l.AddToTail(Circle(x, y, r));
+	}
+	return os;
 }
 List::~List(){
 	while (Head.m_Next_p != &Tail){

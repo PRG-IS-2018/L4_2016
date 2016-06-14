@@ -61,17 +61,24 @@ void main() {
 
 	L3.Sort();
 	std::cout << L3;
-	std::ofstream fi;
+	std::ofstream fo;
 
-	fi.open("my.txt");
-	if (fi.is_open()) {
-		fi << L3;
+	fo.open("my.txt");
+	if (fo.is_open()) {
+		fo << L3;
 	}
 	else{
 		std::cout << "error!!" << std::endl;
 	}
+	fo.close();
+	
+	std::ifstream fi;
+	List L4;
+	fi.open("my.txt");
+	if (fi.is_open()) {
+		fi >> L4;
+	}
 	fi.close();
-	List L4();
-
+	std::cout << L4;
 	_SP;
 }
