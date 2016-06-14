@@ -246,7 +246,7 @@ List& List::operator=(const List& other) {
 	}
 	return *this;
 }
-std::ostream& operator<<(std::ostream& os, List& l) {          
+std::ostream& operator<<(std::ostream& os, const List& l) {
 	List::Node* curN = l.Head.m_Next_p;
 	while (curN != &l.Tail) {
 		os << curN->m_Cir << std::endl;
@@ -255,7 +255,7 @@ std::ostream& operator<<(std::ostream& os, List& l) {
 	return os;
 }
 
-std::ofstream& operator<<(std::ofstream& os, List&l) {
+std::ofstream& operator<<(std::ofstream& os, const List&l) {
 	List::Node* curN = l.Head.m_Next_p;
 	while (curN != &l.Tail) {
 		os << curN->m_Cir << std::endl;

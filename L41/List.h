@@ -45,8 +45,8 @@ public:
 	void Sort();
 
 	
-	friend std::ostream& operator<<(std::ostream&, List&);
-	friend std::ofstream& operator<<(std::ofstream&, List&);
+	friend std::ostream& operator<<(std::ostream&, const List&);
+	friend std::ofstream& operator<<(std::ofstream&, const List&);
 	friend std::ifstream& operator>>(std::ifstream&, List&);
 
 };
