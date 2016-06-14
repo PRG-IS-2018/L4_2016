@@ -28,7 +28,8 @@ public:
 	List();
 	List(const List&);
 	List(List&&);
-	
+	~List();
+
 	//Node& Find(List&, typename T );
 	Node& FindMin(List&);
 	void AddToTail(const Circle&);
@@ -46,6 +47,7 @@ public:
 	
 	friend std::ostream& operator<<(std::ostream&, List&);
 	friend std::ofstream& operator<<(std::ofstream&, List&);
-	~List();
+	friend std::ifstream& operator>>(std::ifstream&, List&);
+
 };
 

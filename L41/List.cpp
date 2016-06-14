@@ -254,6 +254,7 @@ std::ostream& operator<<(std::ostream& os, List& l) {
 	}
 	return os;
 }
+
 std::ofstream& operator<<(std::ofstream& os, List&l) {
 	List::Node* curN = l.Head.m_Next_p;
 	while (curN != &l.Tail) {
@@ -263,6 +264,9 @@ std::ofstream& operator<<(std::ofstream& os, List&l) {
 	return os;
 }
 
+std::ifstream& operator >> (std::ifstream& os, List&l) {
+
+}
 List::~List(){
 	while (Head.m_Next_p != &Tail){
 		delete Tail.m_Prev_p;

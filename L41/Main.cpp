@@ -16,7 +16,7 @@ typedef unsigned int uint;
 void main() {
 
 
-	Point p1 (1,1);
+	Point p1{ 1,1 };
 	Point p10(5, 5);
 	Point p2 = p1;
 	Point p3(p2);
@@ -55,11 +55,23 @@ void main() {
 	std::cout << L3;
 	_SP*/
 	L3 = L1;
-	std::cout << L3;
+	//std::cout << L3;
 	_SP;
 	L3 = L2;
+
 	L3.Sort();
 	std::cout << L3;
-	
+	std::ofstream fi;
+
+	fi.open("my.txt");
+	if (fi.is_open()) {
+		fi << L3;
+	}
+	else{
+		std::cout << "error!!" << std::endl;
+	}
+	fi.close();
+	List L4();
+
 	_SP;
 }

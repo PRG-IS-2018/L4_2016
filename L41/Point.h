@@ -15,13 +15,14 @@ class Point{
 
 	friend Point operator+ (const int, const Point&);
 
-	friend std::ostream& operator<<(std::ostream&, const Point&);
-	friend std::fstream& operator<<(std::fstream&, const Point&);
+	//friend std::ostream& operator<<(std::ostream&, const Point&);
+	//friend std::fstream& operator<<(std::fstream&, const Point&);
 
 	
 	public:
-		explicit Point(double = 0, double = 0);
-		bool operator==(const Point&);
+	
+	explicit Point(double = 0, double = 0);
+	bool operator==(const Point&);
 		
 	//Point(Point&&); //не сильно нужен, но написан для проверки
 	Point& operator= (const Point&);
@@ -36,5 +37,6 @@ class Point{
 
 	friend std::ostream& operator<<(std::ostream&, const Point&);
 	friend std::ofstream& operator<< (std::ofstream&, const Point&);
+
 };
 
