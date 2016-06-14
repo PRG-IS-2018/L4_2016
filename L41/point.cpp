@@ -1,5 +1,6 @@
 #include "Point.h"
 
+
 Point::Point(double x, double y) {
 	m_x = x;
 	m_y = y;
@@ -70,4 +71,8 @@ bool Point::operator==(const Point & other) {
 
 std::ostream& operator<<(std::ostream& os, const  Point& poi) {
 	return	os << "Point: x=" << poi.m_x << ",  y=" << poi.m_y;
+}
+std::ofstream& operator<<(std::ofstream& os, const Point& poi) {
+	os << poi.m_x << " " << poi.m_y;
+	return	os;
 }

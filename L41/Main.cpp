@@ -1,7 +1,7 @@
 
-#include <tchar.h>
-#include <iostream>
-#include <conio.h>
+//#include <tchar.h>
+//#include <iostream>
+//#include <conio.h>
 
 #include "circle.h"
 #include "List.h"
@@ -16,7 +16,7 @@ typedef unsigned int uint;
 void main() {
 
 
-	Point p1 = { 1,1 };
+	Point p1 (1,1);
 	Point p10(5, 5);
 	Point p2 = p1;
 	Point p3(p2);

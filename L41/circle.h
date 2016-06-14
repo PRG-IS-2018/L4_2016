@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+//#include <iostream>
 #include "Point.h"
 
 
@@ -19,6 +19,7 @@ public:
 	//bool operator==(const Circle&, typename);
 	double GetArea();
 	friend std::ostream& operator<<(std::ostream&, const  Circle&);
+	friend std::ofstream& operator<<(std::ofstream&, const Circle&);
 	~Circle() = default;
 
 };

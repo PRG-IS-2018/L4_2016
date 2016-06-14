@@ -45,6 +45,7 @@ public:
 
 	
 	friend std::ostream& operator<<(std::ostream&, List&);
+	friend std::ofstream& operator<<(std::ofstream&, List&);
 	~List();
 };
 

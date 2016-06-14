@@ -1,5 +1,5 @@
 #include "circle.h"
-#include "Point.h"
+//#include "Point.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -23,7 +23,10 @@ bool Circle::operator==(const Circle& other) {
 std::ostream& operator<<(std::ostream& os, const Circle& cir) {
 	return os << "Circle: centr - (" << cir.m_centr << "), rad - " << cir.m_rad << std::endl;
 }
-
+std::ofstream& operator<<(std::ofstream& os, const Circle& cir) {
+	os << cir.m_centr << " " << cir.m_rad;
+		return os;
+}
 double Circle::GetArea() {
 	return m_rad*m_rad* M_PI;
 }
