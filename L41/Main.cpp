@@ -56,16 +56,17 @@ void main() {
 	_SP*/
 	L3 = L1;
 	//std::cout << L3;
-	_SP;
+	//_SP;
 	L3 = L2;
 
 	L3.Sort();
 	std::cout << L3;
 	std::ofstream fo;
-
+	_SP
 	fo.open("my.txt");
 	if (fo.is_open()) {
 		fo << L3;
+		std::cout <<"List saved" << std::endl;
 	}
 	else{
 		std::cout << "error!!" << std::endl;
@@ -77,6 +78,7 @@ void main() {
 	fi.open("my.txt");
 	if (fi.is_open()) {
 		fi >> L4;
+		std::cout << "List restored" << std::endl;
 	}
 	fi.close();
 	std::cout << L4;

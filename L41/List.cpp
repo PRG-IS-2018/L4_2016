@@ -45,7 +45,7 @@ List::Node::~Node(){
 	//List::m_size--;
 }
 
-List::List():Tail(),Head(){
+List::List(){
 	Tail.m_Prev_p = &Head;
 	Head.m_Next_p = &Tail;
 	m_size = 0; 
@@ -150,7 +150,7 @@ void List::Swap(List& other) {
 }
 
 
-List::Node& List::FindMin(List&) {
+List::Node& List::FindMin() {
 	Node* MinNode = Head.m_Next_p;
 	Node* RunningNode = MinNode;
 	while (RunningNode != &Tail){
@@ -165,7 +165,7 @@ List::Node& List::FindMin(List&) {
 void List::Sort() {
 	List tmp;
 	while (Head.m_Next_p != &Tail){
-		tmp.AddNodeT(GetRemoveNode(FindMin(*this)));
+		tmp.AddNodeT(GetRemoveNode(FindMin()));
 	}
 	Swap(tmp);
 }
@@ -215,12 +215,14 @@ uint32_t List::FindRemoveAllCir(const Circle & cir) {
 	uint32_t counter=0;
 	List::Node* curN = Head.m_Next_p;
 	while (curN != &Tail) {
+		Node* tmp = curN->m_Next_p;
 		if (curN->m_Cir == cir) {
+			
 			delete curN;
 			m_size--;
 			counter++;
 		}
-		curN = curN->m_Next_p;
+		curN = tmp;
 	}
 	return counter;
 }
@@ -246,23 +248,39 @@ List& List::operator=(const List& other) {
 	}
 	return *this;
 }
+//std::ostream& operator<<(std::ostream& os, const List& l) {
+//	List::Node* curN = l.Head.m_Next_p;
+//	while (curN != &l.Tail) {
+//		os << curN->m_Cir << std::endl;
+//		curN = curN->m_Next_p;
+//	}
+//	return os;
+//}
+//
+
+//std::ofstream& operator<<(std::ofstream& os, const List&l) {
+//	List::Node* curN = l.Head.m_Next_p;
+//	while (curN != &l.Tail) {
+//		os << curN->m_Cir << std::endl;
+//		curN = curN->m_Next_p;
+//	}
+//	return os;
+//}
+
 std::ostream& operator<<(std::ostream& os, const List& l) {
 	List::Node* curN = l.Head.m_Next_p;
 	while (curN != &l.Tail) {
-		os << curN->m_Cir << std::endl;
+		try {
+			dynamic_cast<std::ofstream&>(os) << curN->m_Cir << std::endl;
+		}
+		catch (std::bad_cast) {
+			os << curN->m_Cir << std::endl;
+		}
 		curN = curN->m_Next_p;
 	}
 	return os;
 }
 
-std::ofstream& operator<<(std::ofstream& os, const List&l) {
-	List::Node* curN = l.Head.m_Next_p;
-	while (curN != &l.Tail) {
-		os << curN->m_Cir << std::endl;
-		curN = curN->m_Next_p;
-	}
-	return os;
-}
 
 std::ifstream& operator>> (std::ifstream& os, List&l) {
 	double x, y, r;
@@ -276,5 +294,5 @@ List::~List(){
 		delete Tail.m_Prev_p;
 		m_size--;
 	}
-// delete Head,Tail ???
+
 }
